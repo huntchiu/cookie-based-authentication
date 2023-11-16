@@ -4,7 +4,20 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+
+@if (User?.Identity?.IsAuthenticated == true)
+{
+    // 用戶已認證
+    <form method="post" asp-page="Account/Logout" >
+        <h4>
+        Welcome @User.Identity.Name
+        </h4>
+        <button  class="btn btn-primary" type="submit">Logout </button>
+    </form>    
+}
+else
+{
+    // 用戶未認證
+   <a class="btn btn-primary" asp-page="Account/Login"> Login </a>
+}
